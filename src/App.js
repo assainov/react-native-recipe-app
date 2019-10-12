@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
 import * as Font from 'expo-font';
-import { AppLoading } from 'expo';
+import { AppLoading, registerRootComponent } from 'expo';
+import { useScreens } from 'react-native-screens';
 
 import MealsNavigator from './navigation/meals-navigator';
+
+useScreens();
 
 const fetchFonts = () =>
   Font.loadAsync({
@@ -11,7 +13,7 @@ const fetchFonts = () =>
     'primary-bold': require('./assets/fonts/OpenSans-Bold.ttf'), // eslint-disable-line
   });
 
-export default function App() {
+const App = () => {
   const [fontsLoaded, setFontsLoaded] = useState(false);
 
   if (!fontsLoaded) {
@@ -25,4 +27,6 @@ export default function App() {
   }
 
   return <MealsNavigator />;
-}
+};
+
+export default registerRootComponent(App);
